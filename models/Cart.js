@@ -64,8 +64,6 @@ module.exports.updateCartByCartId = function (cartId, newCart, callback) {
   )
 }
 
-
-
 module.exports.createCart = function (newCart, callback) {
   newCart.save(callback)
 }

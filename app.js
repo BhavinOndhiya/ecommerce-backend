@@ -1,3 +1,4 @@
+require('dotenv').config(); // Load environment variables from .env file
 var createError = require('http-errors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -11,10 +12,17 @@ const mongoConfig = require('./configs/mongo-config')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-mongoose.connect(mongoConfig, { useNewUrlParser: true, useCreateIndex: true, },function(error){
-  if(error) throw error
-    console.log(`connect mongodb success`);
+const mongoURI = require('./configs/mongo-config');
+
+mongoose.connect(mongoURI, { useNewUrlParser: true, useCreateIndex: true }, function(error) {
+  if (error) {
+    console.error('Failed to connect to MongoDB:', error);
+  } else {
+    console.log('Connected to MongoDB');
+  }
 });
+
+
 
 var app = express()
 app.use(cors())
